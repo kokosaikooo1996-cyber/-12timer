@@ -487,6 +487,77 @@ header{
 </style>
 
 
+
+<style id="large-readable-text">
+/* 店舗モニターで離れて見ても分かりやすい文字サイズ */
+h1{
+  font-size:clamp(25px,2.6vw,38px)!important;
+  font-weight:1000!important;
+}
+.badge{
+  font-size:15px!important;
+  padding:8px 12px!important;
+}
+.topbar button{
+  font-size:16px!important;
+  font-weight:1000!important;
+}
+.num{
+  font-size:20px!important;
+  font-weight:1000!important;
+}
+.name{
+  font-size:18px!important;
+  font-weight:1000!important;
+}
+.clock{
+  font-size:clamp(34px,4vw,56px)!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.02em!important;
+}
+.endtime{
+  font-size:16px!important;
+  font-weight:900!important;
+}
+.status{
+  font-size:15px!important;
+  font-weight:900!important;
+}
+.primary-presets button{
+  font-size:18px!important;
+  min-height:48px!important;
+  font-weight:1000!important;
+}
+.actions button{
+  font-size:16px!important;
+  min-height:43px!important;
+  font-weight:1000!important;
+}
+.stopalarm{
+  font-size:16px!important;
+  font-weight:1000!important;
+}
+@media (min-width:900px) and (orientation:landscape){
+  h1{font-size:clamp(24px,2.2vw,34px)!important}
+  .badge{font-size:14px!important;padding:6px 10px!important}
+  .topbar button{font-size:15px!important}
+  .num{font-size:18px!important}
+  .name{font-size:17px!important}
+  .clock{font-size:clamp(31px,3.6vw,49px)!important}
+  .endtime{font-size:15px!important}
+  .status{font-size:14px!important}
+  .primary-presets button{
+    font-size:17px!important;
+    min-height:42px!important;
+  }
+  .actions button{
+    font-size:15px!important;
+    min-height:38px!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <noscript><div class="noscript">このタイマーはJavaScriptを使用します。ファイルのプレビュー画面ではなく、SafariでWeb公開したURLを開いてください。</div></noscript>
