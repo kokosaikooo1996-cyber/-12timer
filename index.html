@@ -706,68 +706,109 @@ header{
 </style>
 
 
-<style id="daily-counts-style">
-.daily-counts{
+
+
+
+<style id="daily-counts-sales-style">
+.daily-summary{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  top:4px;
+  top:3px;
   display:flex;
-  align-items:center;
-  gap:8px;
-  background:rgba(255,255,255,.97);
-  color:#0b2a63;
-  border:2px solid #ffd21a;
-  border-radius:12px;
-  padding:4px 8px;
-  box-shadow:0 3px 10px rgba(7,59,140,.16);
+  align-items:stretch;
+  gap:6px;
   z-index:5;
   white-space:nowrap;
 }
+.daily-counts{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  background:rgba(255,255,255,.98);
+  color:#0b2a63;
+  border:2px solid #ffd21a;
+  border-radius:11px;
+  padding:3px 7px;
+  box-shadow:0 3px 10px rgba(7,59,140,.16);
+}
 .count-title{
-  font-size:11px;
+  font-size:10px;
   font-weight:1000;
   color:#0b5fc7;
 }
 .count-items{
   display:flex;
-  gap:5px;
+  gap:4px;
 }
 .count-box{
   display:flex;
   align-items:baseline;
   gap:2px;
-  min-width:62px;
+  min-width:56px;
   justify-content:center;
-  border-radius:8px;
-  padding:3px 6px;
+  border-radius:7px;
+  padding:2px 5px;
   font-weight:1000;
 }
-.count-box span{font-size:10px}
+.count-box span{font-size:9px}
 .count-box strong{
-  font-size:20px;
+  font-size:18px;
   line-height:1;
   font-variant-numeric:tabular-nums;
 }
-.count-box small{font-size:9px}
+.count-box small{font-size:8px}
 .count30{background:#e7f2ff;color:#075ac6}
 .count60{background:#fff2b7;color:#7a5800}
 .countFree{background:#ddf8f8;color:#087d85}
 
-@media (min-width:900px) and (orientation:landscape){
-  .header-inner{
-    position:relative!important;
-  }
+.sales-total{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  min-width:112px;
+  background:linear-gradient(180deg,#fff5bf,#ffd83c);
+  color:#624700;
+  border:2px solid #ffbf00;
+  border-radius:11px;
+  padding:2px 8px;
+  box-shadow:0 3px 10px rgba(7,59,140,.16);
 }
-@media (min-width:900px) and (orientation:landscape) and (max-width:1250px){
-  .daily-counts{
-    gap:5px;
-    padding:3px 5px;
-  }
+.sales-total span{
+  font-size:9px;
+  font-weight:1000;
+  line-height:1.1;
+}
+.sales-total strong{
+  font-size:21px;
+  line-height:1.05;
+  font-weight:1000;
+  font-variant-numeric:tabular-nums;
+}
+
+@media (min-width:900px) and (orientation:landscape){
+  .header-inner{position:relative!important}
+}
+
+@media (min-width:900px) and (orientation:landscape) and (max-width:1300px){
+  .daily-summary{gap:4px}
   .count-title{display:none}
-  .count-box{min-width:52px;padding:2px 4px}
-  .count-box span{font-size:9px}
-  .count-box strong{font-size:17px}
+  .daily-counts{padding:2px 4px;gap:3px}
+  .count-box{min-width:47px;padding:2px 3px}
+  .count-box span{font-size:8px}
+  .count-box strong{font-size:16px}
+  .sales-total{min-width:92px;padding:2px 5px}
+  .sales-total span{font-size:8px}
+  .sales-total strong{font-size:18px}
+}
+
+@media (min-width:900px) and (orientation:landscape) and (max-width:1100px){
+  .count-box{min-width:42px}
+  .count-box span{font-size:7px}
+  .count-box strong{font-size:14px}
+  .sales-total{min-width:80px}
+  .sales-total strong{font-size:16px}
 }
 </style>
 
@@ -777,13 +818,20 @@ header{
 <header>
 <div class="header-inner">
   <div class="brand"><div class="logo-dot">★</div><h1>キッズエリア 12タイマー</h1></div>
-  <div class="daily-counts" aria-label="本日の計測回数">
-    <div class="count-title">本日の計測回数</div>
-    <div class="count-items">
-      <div class="count-box count30"><span>30分</span><strong id="count30">0</strong><small>回</small></div>
-      <div class="count-box count60"><span>60分</span><strong id="count60">0</strong><small>回</small></div>
-      <div class="count-box countFree"><span>フリー</span><strong id="countFree">0</strong><small>回</small></div>
+  <div class="daily-summary" aria-label="本日の集計">
+    <div class="daily-counts" aria-label="本日の計測回数">
+      <div class="count-title">本日の計測回数</div>
+      <div class="count-items">
+        <div class="count-box count30"><span>30分</span><strong id="count30">0</strong><small>回</small></div>
+        <div class="count-box count60"><span>60分</span><strong id="count60">0</strong><small>回</small></div>
+        <div class="count-box countFree"><span>フリー</span><strong id="countFree">0</strong><small>回</small></div>
+      </div>
     </div>
+    <div class="sales-total" aria-label="本日の売上合計">
+      <span>本日の売上合計</span>
+      <strong id="salesTotal">¥0</strong>
+    </div>
+  </div>
   </div>
   <div class="summary">
     <span class="badge" id="idleCount">待機 12</span>
@@ -865,9 +913,12 @@ function updateDailyCountDisplay(){
   const a=document.getElementById("count30");
   const b=document.getElementById("count60");
   const c=document.getElementById("countFree");
+  const sales=document.getElementById("salesTotal");
   if(a)a.textContent=dailyCounts.m30;
   if(b)b.textContent=dailyCounts.m60;
   if(c)c.textContent=dailyCounts.free;
+  const total=(dailyCounts.m30*500)+(dailyCounts.m60*800)+(dailyCounts.free*1000);
+  if(sales)sales.textContent=`¥${total.toLocaleString("ja-JP")}`;
 }
 
 function addDailyCount(t){
