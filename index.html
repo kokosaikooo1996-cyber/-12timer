@@ -812,6 +812,133 @@ header{
 }
 </style>
 
+
+<style id="bigger-text-status-right">
+/* 文字をさらに大きくしつつ12個を横画面に収める */
+@media (min-width:900px) and (orientation:landscape){
+  /* 右上：待機・稼働・終了 */
+  .summary{
+    position:absolute!important;
+    right:0!important;
+    top:2px!important;
+    display:flex!important;
+    gap:5px!important;
+    z-index:10!important;
+  }
+  .badge{
+    font-size:14px!important;
+    font-weight:1000!important;
+    padding:6px 10px!important;
+    min-width:62px!important;
+    text-align:center!important;
+  }
+
+  /* 中央上：回数と売上 */
+  .daily-summary{
+    top:1px!important;
+  }
+  .count-title{
+    font-size:12px!important;
+  }
+  .count-box{
+    min-width:64px!important;
+    padding:3px 6px!important;
+  }
+  .count-box span{
+    font-size:11px!important;
+  }
+  .count-box strong{
+    font-size:22px!important;
+  }
+  .count-box small{
+    font-size:10px!important;
+  }
+  .sales-total{
+    min-width:125px!important;
+  }
+  .sales-total span{
+    font-size:11px!important;
+  }
+  .sales-total strong{
+    font-size:24px!important;
+  }
+
+  /* タイマー内 */
+  .num{
+    font-size:21px!important;
+  }
+  .name{
+    font-size:14px!important;
+  }
+  .clock{
+    font-size:clamp(36px,4.6vh,48px)!important;
+    line-height:.94!important;
+  }
+  .endtime{
+    font-size:12px!important;
+    font-weight:900!important;
+  }
+  .status{
+    font-size:11px!important;
+    font-weight:1000!important;
+  }
+  .primary-presets button{
+    font-size:14px!important;
+    font-weight:1000!important;
+  }
+  .actions button{
+    font-size:12px!important;
+    font-weight:1000!important;
+  }
+  .stopalarm{
+    font-size:11px!important;
+    font-weight:1000!important;
+  }
+}
+
+/* 1366×768クラスでも枠内に収める */
+@media (min-width:900px) and (orientation:landscape) and (max-height:800px){
+  .badge{
+    font-size:11px!important;
+    padding:4px 7px!important;
+    min-width:52px!important;
+  }
+  .count-title{display:none!important}
+  .count-box{
+    min-width:49px!important;
+    padding:2px 4px!important;
+  }
+  .count-box span{font-size:9px!important}
+  .count-box strong{font-size:18px!important}
+  .count-box small{font-size:8px!important}
+  .sales-total{min-width:96px!important}
+  .sales-total span{font-size:9px!important}
+  .sales-total strong{font-size:20px!important}
+
+  .num{font-size:18px!important}
+  .name{font-size:11px!important}
+  .clock{font-size:clamp(29px,4.2vh,35px)!important}
+  .endtime{font-size:9px!important}
+  .status{font-size:8px!important}
+  .primary-presets button{font-size:11px!important}
+  .actions button{font-size:10px!important}
+}
+
+/* 幅が狭いモニターでは中央集計と右上ステータスが重ならないよう縮小 */
+@media (min-width:900px) and (orientation:landscape) and (max-width:1250px){
+  .daily-summary{
+    transform:translateX(-56%) scale(.90)!important;
+    transform-origin:center top!important;
+  }
+  .summary{gap:3px!important}
+  .badge{
+    min-width:46px!important;
+    font-size:10px!important;
+    padding:4px 5px!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <noscript><div class="noscript">このタイマーはJavaScriptを使用します。ファイルのプレビュー画面ではなく、SafariでWeb公開したURLを開いてください。</div></noscript>
