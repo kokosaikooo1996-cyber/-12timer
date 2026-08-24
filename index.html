@@ -705,12 +705,86 @@ header{
 }
 </style>
 
+
+<style id="daily-counts-style">
+.daily-counts{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:4px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,.97);
+  color:#0b2a63;
+  border:2px solid #ffd21a;
+  border-radius:12px;
+  padding:4px 8px;
+  box-shadow:0 3px 10px rgba(7,59,140,.16);
+  z-index:5;
+  white-space:nowrap;
+}
+.count-title{
+  font-size:11px;
+  font-weight:1000;
+  color:#0b5fc7;
+}
+.count-items{
+  display:flex;
+  gap:5px;
+}
+.count-box{
+  display:flex;
+  align-items:baseline;
+  gap:2px;
+  min-width:62px;
+  justify-content:center;
+  border-radius:8px;
+  padding:3px 6px;
+  font-weight:1000;
+}
+.count-box span{font-size:10px}
+.count-box strong{
+  font-size:20px;
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.count-box small{font-size:9px}
+.count30{background:#e7f2ff;color:#075ac6}
+.count60{background:#fff2b7;color:#7a5800}
+.countFree{background:#ddf8f8;color:#087d85}
+
+@media (min-width:900px) and (orientation:landscape){
+  .header-inner{
+    position:relative!important;
+  }
+}
+@media (min-width:900px) and (orientation:landscape) and (max-width:1250px){
+  .daily-counts{
+    gap:5px;
+    padding:3px 5px;
+  }
+  .count-title{display:none}
+  .count-box{min-width:52px;padding:2px 4px}
+  .count-box span{font-size:9px}
+  .count-box strong{font-size:17px}
+}
+</style>
+
 </head>
 <body>
 <noscript><div class="noscript">このタイマーはJavaScriptを使用します。ファイルのプレビュー画面ではなく、SafariでWeb公開したURLを開いてください。</div></noscript>
 <header>
 <div class="header-inner">
   <div class="brand"><div class="logo-dot">★</div><h1>キッズエリア 12タイマー</h1></div>
+  <div class="daily-counts" aria-label="本日の計測回数">
+    <div class="count-title">本日の計測回数</div>
+    <div class="count-items">
+      <div class="count-box count30"><span>30分</span><strong id="count30">0</strong><small>回</small></div>
+      <div class="count-box count60"><span>60分</span><strong id="count60">0</strong><small>回</small></div>
+      <div class="count-box countFree"><span>フリー</span><strong id="countFree">0</strong><small>回</small></div>
+    </div>
+  </div>
   <div class="summary">
     <span class="badge" id="idleCount">待機 12</span>
     <span class="badge run" id="runCount">稼働 0</span>
@@ -728,7 +802,7 @@ header{
   <div class="notice">※ 終了予定時刻とタイマー状態は端末内に自動保存されます。音を鳴らすため、使用開始時に一度画面をタップしてください。</div>
 </main>
 <script>
-const COUNT=12, KEY="kidsarea-12timer-v1";
+const COUNT=12, KEY="kidsarea-12timer-v1", COUNT_KEY="kidsarea-daily-counts-v1";
 let audioCtx=null, alarmTimer=null;
 let alarmSet=new Set();
 
@@ -746,10 +820,64 @@ function baseTimer(i){
     pausedAt:null,
     done:false,
     warned5:false,
-    warned1:false
+    warned1:false,
+    sessionCounted:false
   };
 }
 let timers=Array.from({length:COUNT},(_,i)=>baseTimer(i));
+
+
+function todayKey(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+let dailyCounts={date:todayKey(),m30:0,m60:0,free:0};
+
+function loadDailyCounts(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(COUNT_KEY));
+    if(saved && saved.date===todayKey()){
+      dailyCounts={
+        date:saved.date,
+        m30:Number(saved.m30)||0,
+        m60:Number(saved.m60)||0,
+        free:Number(saved.free)||0
+      };
+    }else{
+      dailyCounts={date:todayKey(),m30:0,m60:0,free:0};
+      localStorage.setItem(COUNT_KEY,JSON.stringify(dailyCounts));
+    }
+  }catch(e){
+    dailyCounts={date:todayKey(),m30:0,m60:0,free:0};
+  }
+  updateDailyCountDisplay();
+}
+
+function ensureCurrentDay(){
+  if(dailyCounts.date!==todayKey()){
+    dailyCounts={date:todayKey(),m30:0,m60:0,free:0};
+    localStorage.setItem(COUNT_KEY,JSON.stringify(dailyCounts));
+    updateDailyCountDisplay();
+  }
+}
+
+function updateDailyCountDisplay(){
+  const a=document.getElementById("count30");
+  const b=document.getElementById("count60");
+  const c=document.getElementById("countFree");
+  if(a)a.textContent=dailyCounts.m30;
+  if(b)b.textContent=dailyCounts.m60;
+  if(c)c.textContent=dailyCounts.free;
+}
+
+function addDailyCount(t){
+  ensureCurrentDay();
+  if(t.mode==="free") dailyCounts.free++;
+  else if(t.duration===1800) dailyCounts.m30++;
+  else if(t.duration===3600) dailyCounts.m60++;
+  localStorage.setItem(COUNT_KEY,JSON.stringify(dailyCounts));
+  updateDailyCountDisplay();
+}
 
 function save(){localStorage.setItem(KEY,JSON.stringify(timers))}
 function load(){
@@ -848,7 +976,7 @@ function setCountdown(i,sec){
   const t=timers[i];
   Object.assign(t,{
     mode:"countdown",duration:sec,remaining:sec,elapsed:0,running:false,
-    endAt:null,startAt:null,done:false,warned5:false,warned1:false
+    endAt:null,startAt:null,done:false,warned5:false,warned1:false,sessionCounted:false
   });
   alarmSet.delete(t.id);stopAlarmIfNone();save();render();
 }
@@ -856,7 +984,7 @@ function setFree(i){
   const t=timers[i];
   Object.assign(t,{
     mode:"free",duration:7200,remaining:0,elapsed:0,running:false,
-    endAt:null,startAt:null,done:false,warned5:false,warned1:false
+    endAt:null,startAt:null,done:false,warned5:false,warned1:false,sessionCounted:false
   });
   alarmSet.delete(t.id);stopAlarmIfNone();save();render();
 }
@@ -875,6 +1003,10 @@ function onClick(e,i){
     if(t.done){t.done=false;t.remaining=t.duration;alarmSet.delete(t.id)}
     if(!t.running){
       const now=Date.now();
+      if(!t.sessionCounted){
+        addDailyCount(t);
+        t.sessionCounted=true;
+      }
       if(t.mode==="free"){
         t.startAt=now-(t.elapsed*1000);
         t.running=true;
@@ -901,7 +1033,7 @@ function onClick(e,i){
   if(a==="stopalarm"){
     alarmSet.delete(t.id);
     t.done=false;t.running=false;t.endAt=null;
-    t.remaining=t.duration;t.warned5=false;t.warned1=false;
+    t.remaining=t.duration;t.warned5=false;t.warned1=false;t.sessionCounted=false;
     save();stopAlarmIfNone();render();
   }
 }
@@ -928,6 +1060,7 @@ function startAlarm(){
 }
 function stopAlarmIfNone(){if(!alarmSet.size&&alarmTimer){clearInterval(alarmTimer);alarmTimer=null}}
 function tick(){
+  ensureCurrentDay();
   const now=Date.now();let saveNeeded=false;
   timers.forEach(t=>{
     if(!t.running)return;
@@ -996,7 +1129,7 @@ document.getElementById("resetAll").onclick=()=>{
 document.addEventListener("click",unlockAudio,{once:true});
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){load();render()}});
 window.addEventListener("beforeunload",save);
-load();render();setInterval(tick,250);
+loadDailyCounts();load();render();setInterval(tick,250);
 </script>
 </body>
 </html>
