@@ -7,8 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="12タイマー">
-<link rel="manifest" href="./manifest.webmanifest">
-<title>店舗用 12タイマー</title>
+<title>キッズエリア 12タイマー</title>
 <style>
 :root{
   --navy:#0b1f3a; --blue:#0b63ce; --blue2:#eaf3ff; --yellow:#ffd43b;
@@ -34,6 +33,10 @@ button{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:poin
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .card{background:#fff;border:3px solid transparent;border-radius:16px;padding:10px;box-shadow:0 6px 18px rgba(16,32,51,.08)}
 .card.running{border-color:#34d399}.card.warn5{border-color:#f7b733;background:#fffaf0}.card.warn1{border-color:#f97316;background:#fff6ed}.card.done{border-color:#ef4444;background:#fff1f2;animation:pulse 1s infinite}
+.card.free{border-color:#38bdf8;background:#f0f9ff}
+.card.free120{border-color:#8b5cf6;background:#f3e8ff;box-shadow:0 0 0 3px rgba(139,92,246,.18)}
+.card.free120 .clock{color:#6d28d9}
+.pfree{background:#e9d5ff;color:#6b21a8}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.22)}50%{box-shadow:0 0 0 7px rgba(239,68,68,.1)}}
 .card-head{display:flex;align-items:center;gap:8px}
 .num{width:38px;height:38px;border-radius:10px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:18px;font-weight:1000;flex:0 0 auto}
@@ -41,17 +44,17 @@ button{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:poin
 .clock{text-align:center;font-weight:1000;font-variant-numeric:tabular-nums;letter-spacing:.02em;font-size:clamp(36px,4vw,60px);line-height:1;margin:10px 0 6px}
 .endtime{text-align:center;font-weight:900;color:#334155;font-size:14px;min-height:20px}
 .status{text-align:center;font-size:12px;color:var(--muted);font-weight:900;margin-bottom:8px;min-height:18px}
-.primary-presets{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}
+.primary-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:7px}
 .primary-presets button{font-size:18px;min-height:48px}
 .p30{background:#eaf3ff;color:#104d96}.p60{background:#fff3bf;color:#7a5600}
-.secondary{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:7px}
+.secondary{display:none}
 .secondary button{background:#edf2f7;color:#334155;padding:8px 4px;min-height:38px}
 .actions{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px}
 .start{background:var(--blue);color:white}.pause{background:#fef3c7;color:#92400e}.reset{background:#e2e8f0;color:#334155}
-.extend{width:100%;margin-top:7px;background:#dff7ea;color:#0b6b40}
+.extend{display:none}
 .stopalarm{display:none;width:100%;margin-top:7px;background:var(--red);color:#fff;font-size:16px}
 .card.done .stopalarm{display:block}
-.customrow{display:flex;gap:6px;margin-top:7px}
+.customrow{display:none}
 .customrow input{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:8px;text-align:center;font-weight:900}
 .customrow button{background:#e2e8f0;white-space:nowrap}
 .notice{margin:8px 0 0;text-align:center;color:#6b7a90;font-size:12px}
@@ -162,6 +165,7 @@ button{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:poin
   }
 
   .primary-presets{
+    grid-template-columns:repeat(3,1fr);
     flex:0 0 25px;
     min-height:25px;
     gap:3px;
@@ -175,19 +179,7 @@ button{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:poin
     border-radius:6px;
   }
 
-  .secondary{
-    flex:0 0 20px;
-    min-height:20px;
-    gap:3px;
-    margin:0 0 2px;
-  }
-  .secondary button{
-    min-height:20px;
-    height:20px;
-    padding:1px 2px;
-    font-size:8px;
-    border-radius:5px;
-  }
+  .secondary{display:none}
 
   .actions{
     flex:0 0 21px;
@@ -202,37 +194,7 @@ button{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:poin
     border-radius:5px;
   }
 
-  .extend{
-    flex:0 0 20px;
-    min-height:20px;
-    height:20px;
-    margin:2px 0 0;
-    padding:1px 3px;
-    font-size:8px;
-    border-radius:5px;
-  }
-
-  .customrow{
-    flex:0 0 20px;
-    min-height:20px;
-    height:20px;
-    gap:3px;
-    margin:2px 0 0;
-  }
-  .customrow input{
-    height:20px;
-    min-height:20px;
-    padding:1px 3px;
-    font-size:8px;
-    border-radius:5px;
-  }
-  .customrow button{
-    height:20px;
-    min-height:20px;
-    padding:1px 5px;
-    font-size:8px;
-    border-radius:5px;
-  }
+  .extend,.customrow{display:none}
 
   .stopalarm{
     flex:0 0 20px;
@@ -278,7 +240,7 @@ button{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:poin
 <noscript><div class="noscript">このタイマーはJavaScriptを使用します。ファイルのプレビュー画面ではなく、SafariでWeb公開したURLを開いてください。</div></noscript>
 <header>
 <div class="header-inner">
-  <div class="brand"><div class="logo-dot">HD</div><h1>店舗用 12タイマー</h1></div>
+  <div class="brand"><div class="logo-dot">HD</div><h1>キッズエリア 12タイマー</h1></div>
   <div class="summary">
     <span class="badge" id="idleCount">待機 12</span>
     <span class="badge run" id="runCount">稼働 0</span>
@@ -296,12 +258,26 @@ button{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:poin
   <div class="notice">※ 終了予定時刻とタイマー状態は端末内に自動保存されます。音を鳴らすため、使用開始時に一度画面をタップしてください。</div>
 </main>
 <script>
-const COUNT=12, KEY="hd-12timer-v3";
+const COUNT=12, KEY="kidsarea-12timer-v1";
 let audioCtx=null, alarmTimer=null;
 let alarmSet=new Set();
 
 function baseTimer(i){
-  return {id:i+1,name:`受付 ${i+1}`,duration:1800,remaining:1800,running:false,endAt:null,done:false,warned5:false,warned1:false};
+  return {
+    id:i+1,
+    name:`受付 ${i+1}`,
+    mode:"countdown",
+    duration:1800,
+    remaining:1800,
+    elapsed:0,
+    running:false,
+    endAt:null,
+    startAt:null,
+    pausedAt:null,
+    done:false,
+    warned5:false,
+    warned1:false
+  };
 }
 let timers=Array.from({length:COUNT},(_,i)=>baseTimer(i));
 
@@ -316,18 +292,28 @@ function load(){
 function syncFromClock(){
   const now=Date.now();
   timers.forEach(t=>{
-    if(t.running&&t.endAt){
+    if(!t.running)return;
+    if(t.mode==="free" && t.startAt){
+      t.elapsed=Math.max(0,Math.floor((now-t.startAt)/1000));
+    }else if(t.endAt){
       t.remaining=Math.max(0,Math.ceil((t.endAt-now)/1000));
-      if(t.remaining<=0){t.running=false;t.done=true;t.endAt=null;alarmSet.add(t.id)}
+      if(t.remaining<=0){
+        t.running=false;t.done=true;t.endAt=null;alarmSet.add(t.id);
+      }
     }
   });
 }
 function fmt(sec){
-  sec=Math.max(0,Math.ceil(sec));
+  sec=Math.max(0,Math.floor(sec));
   const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
   return h?`${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`:`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 }
+function timeValue(t){return t.mode==="free"?t.elapsed:t.remaining}
 function endText(t){
+  if(t.mode==="free"){
+    if(t.elapsed>=7200)return "120分を超えています";
+    return "フリータイム（最低120分）";
+  }
   if(t.done)return "終了しました";
   if(t.running&&t.endAt){
     const d=new Date(t.endAt);
@@ -336,6 +322,12 @@ function endText(t){
   return "終了予定 --:--";
 }
 function statusText(t){
+  if(t.mode==="free"){
+    if(t.elapsed>=7200)return "フリータイム 120分経過";
+    if(t.running)return "フリータイム計測中";
+    if(t.elapsed>0)return "フリータイム一時停止中";
+    return "フリータイム待機";
+  }
   if(t.done)return "アラーム中";
   if(t.running&&t.remaining<=60)return "残り1分以内";
   if(t.running&&t.remaining<=300)return "残り5分以内";
@@ -345,6 +337,10 @@ function statusText(t){
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 function cardClass(t){
+  if(t.mode==="free"){
+    if(t.elapsed>=7200)return "card free120";
+    return "card free";
+  }
   if(t.done)return "card done";
   if(t.running&&t.remaining<=60)return "card warn1";
   if(t.running&&t.remaining<=300)return "card warn5";
@@ -358,71 +354,85 @@ function render(){
     el.className=cardClass(t);
     el.innerHTML=`
       <div class="card-head"><div class="num">${t.id}</div><input class="name" value="${esc(t.name)}" aria-label="名称"></div>
-      <div class="clock">${fmt(t.remaining)}</div>
+      <div class="clock">${fmt(timeValue(t))}</div>
       <div class="endtime">${endText(t)}</div>
       <div class="status">${statusText(t)}</div>
       <div class="primary-presets">
-        <button class="p30" data-a="preset" data-min="30">30分</button>
-        <button class="p60" data-a="preset" data-min="60">60分</button>
-      </div>
-      <div class="secondary">
-        <button data-a="preset" data-min="90">90分</button>
-        <button data-a="preset" data-min="120">120分</button>
-        <button data-a="preset" data-min="15">15分</button>
-        <button data-a="preset" data-min="45">45分</button>
+        <button class="p30" data-a="countdown" data-min="30">30分</button>
+        <button class="p60" data-a="countdown" data-min="60">60分</button>
+        <button class="pfree" data-a="free">フリー</button>
       </div>
       <div class="actions">
         <button class="start" data-a="start">${t.running?"稼働中":"スタート"}</button>
         <button class="pause" data-a="pause">一時停止</button>
         <button class="reset" data-a="reset">リセット</button>
       </div>
-      <button class="extend" data-a="extend">＋30分 延長</button>
-      <div class="customrow">
-        <input type="number" min="1" max="999" value="30" inputmode="numeric" aria-label="任意の分数">
-        <button data-a="custom">任意設定</button>
-      </div>
       <button class="stopalarm" data-a="stopalarm">アラーム停止・受付終了</button>`;
     el.querySelector(".name").addEventListener("input",e=>{timers[i].name=e.target.value;save()});
-    el.addEventListener("click",e=>onClick(e,i,el));
+    el.addEventListener("click",e=>onClick(e,i));
     g.appendChild(el);
   });
   updateSummary();
 }
-function setDuration(i,sec){
+function setCountdown(i,sec){
   const t=timers[i];
-  t.duration=sec;t.remaining=sec;t.running=false;t.endAt=null;t.done=false;t.warned5=false;t.warned1=false;
-  alarmSet.delete(t.id); save(); stopAlarmIfNone(); render();
+  Object.assign(t,{
+    mode:"countdown",duration:sec,remaining:sec,elapsed:0,running:false,
+    endAt:null,startAt:null,done:false,warned5:false,warned1:false
+  });
+  alarmSet.delete(t.id);stopAlarmIfNone();save();render();
 }
-function onClick(e,i,card){
+function setFree(i){
+  const t=timers[i];
+  Object.assign(t,{
+    mode:"free",duration:7200,remaining:0,elapsed:0,running:false,
+    endAt:null,startAt:null,done:false,warned5:false,warned1:false
+  });
+  alarmSet.delete(t.id);stopAlarmIfNone();save();render();
+}
+function resetTimer(i){
+  const t=timers[i];
+  if(t.mode==="free")setFree(i);
+  else setCountdown(i,t.duration);
+}
+function onClick(e,i){
   const b=e.target.closest("button"); if(!b)return;
   unlockAudio();
   const a=b.dataset.a,t=timers[i];
-  if(a==="preset")setDuration(i,Number(b.dataset.min)*60);
-  if(a==="custom"){
-    const v=Number(card.querySelector(".customrow input").value)||0;
-    if(v>0)setDuration(i,v*60);
-  }
+  if(a==="countdown")setCountdown(i,Number(b.dataset.min)*60);
+  if(a==="free")setFree(i);
   if(a==="start"){
     if(t.done){t.done=false;t.remaining=t.duration;alarmSet.delete(t.id)}
     if(!t.running){
-      if(t.remaining<=0)t.remaining=t.duration;
-      t.running=true;t.endAt=Date.now()+t.remaining*1000;
-      t.warned5=t.remaining<=300;t.warned1=t.remaining<=60;
+      const now=Date.now();
+      if(t.mode==="free"){
+        t.startAt=now-(t.elapsed*1000);
+        t.running=true;
+      }else{
+        if(t.remaining<=0)t.remaining=t.duration;
+        t.running=true;t.endAt=now+t.remaining*1000;
+        t.warned5=t.remaining<=300;t.warned1=t.remaining<=60;
+      }
       save();render();
     }
   }
   if(a==="pause"&&t.running){
-    t.remaining=Math.max(0,Math.ceil((t.endAt-Date.now())/1000));t.running=false;t.endAt=null;save();render();
+    const now=Date.now();
+    if(t.mode==="free"){
+      t.elapsed=Math.max(0,Math.floor((now-t.startAt)/1000));
+      t.startAt=null;
+    }else{
+      t.remaining=Math.max(0,Math.ceil((t.endAt-now)/1000));
+      t.endAt=null;
+    }
+    t.running=false;save();render();
   }
-  if(a==="reset")setDuration(i,t.duration);
-  if(a==="extend"){
-    const add=1800;
-    if(t.running&&t.endAt){t.endAt+=add;t.remaining+=add}
-    else{t.remaining+=add;t.duration=Math.max(t.duration,t.remaining)}
-    t.done=false;alarmSet.delete(t.id);save();stopAlarmIfNone();render();
-  }
+  if(a==="reset")resetTimer(i);
   if(a==="stopalarm"){
-    alarmSet.delete(t.id);t.done=false;t.running=false;t.endAt=null;t.remaining=t.duration;t.warned5=false;t.warned1=false;save();stopAlarmIfNone();render();
+    alarmSet.delete(t.id);
+    t.done=false;t.running=false;t.endAt=null;
+    t.remaining=t.duration;t.warned5=false;t.warned1=false;
+    save();stopAlarmIfNone();render();
   }
 }
 function unlockAudio(){
@@ -450,7 +460,12 @@ function stopAlarmIfNone(){if(!alarmSet.size&&alarmTimer){clearInterval(alarmTim
 function tick(){
   const now=Date.now();let saveNeeded=false;
   timers.forEach(t=>{
-    if(!t.running||!t.endAt)return;
+    if(!t.running)return;
+    if(t.mode==="free"){
+      t.elapsed=Math.max(0,Math.floor((now-t.startAt)/1000));
+      return;
+    }
+    if(!t.endAt)return;
     const prev=t.remaining;
     t.remaining=Math.max(0,Math.ceil((t.endAt-now)/1000));
     if(prev>300&&t.remaining<=300&&!t.warned5){t.warned5=true;beep(620,.12)}
@@ -460,7 +475,7 @@ function tick(){
   document.querySelectorAll(".card").forEach((el,i)=>{
     const t=timers[i];
     el.className=cardClass(t);
-    el.querySelector(".clock").textContent=fmt(t.remaining);
+    el.querySelector(".clock").textContent=fmt(timeValue(t));
     el.querySelector(".endtime").textContent=endText(t);
     el.querySelector(".status").textContent=statusText(t);
     el.querySelector(".start").textContent=t.running?"稼働中":"スタート";
@@ -476,25 +491,41 @@ function updateSummary(){
 }
 document.getElementById("pauseAll").onclick=()=>{
   unlockAudio();const now=Date.now();
-  timers.forEach(t=>{if(t.running){t.remaining=Math.max(0,Math.ceil((t.endAt-now)/1000));t.running=false;t.endAt=null}});
+  timers.forEach(t=>{
+    if(!t.running)return;
+    if(t.mode==="free"){
+      t.elapsed=Math.max(0,Math.floor((now-t.startAt)/1000));t.startAt=null;
+    }else{
+      t.remaining=Math.max(0,Math.ceil((t.endAt-now)/1000));t.endAt=null;
+    }
+    t.running=false;
+  });
   save();render();
 };
 document.getElementById("resumeAll").onclick=()=>{
   unlockAudio();const now=Date.now();
-  timers.forEach(t=>{if(!t.running&&!t.done&&t.remaining>0&&t.remaining<t.duration){t.running=true;t.endAt=now+t.remaining*1000}});
+  timers.forEach(t=>{
+    if(t.running||t.done)return;
+    if(t.mode==="free"&&t.elapsed>0){
+      t.startAt=now-t.elapsed*1000;t.running=true;
+    }else if(t.mode==="countdown"&&t.remaining>0&&t.remaining<t.duration){
+      t.endAt=now+t.remaining*1000;t.running=true;
+    }
+  });
   save();render();
 };
 document.getElementById("resetAll").onclick=()=>{
   unlockAudio();
   if(confirm("12個すべてのタイマーをリセットしますか？")){
-    timers=timers.map((t,i)=>({...baseTimer(i),name:t.name,duration:t.duration,remaining:t.duration}));
+    timers=timers.map((t,i)=>{
+      const n=baseTimer(i);n.name=t.name;return n;
+    });
     alarmSet.clear();stopAlarmIfNone();save();render();
   }
 };
 document.addEventListener("click",unlockAudio,{once:true});
 document.addEventListener("visibilitychange",()=>{if(!document.hidden){load();render()}});
 window.addEventListener("beforeunload",save);
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 load();render();setInterval(tick,250);
 </script>
 </body>
