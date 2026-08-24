@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="12タイマー">
-<title>キッズエリア 12タイマー</title>
+<title>キッズエリア 12タイマー｜ボールプール</title>
 <style>
 :root{
   --navy:#0b1f3a; --blue:#0b63ce; --blue2:#eaf3ff; --yellow:#ffd43b;
@@ -235,12 +235,264 @@ button{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:poin
   .extend,.customrow button,.stopalarm,.customrow input{font-size:7px}
 }
 </style>
+
+
+<style id="ballpool-theme">
+:root{
+  --navy:#073b8c;
+  --blue:#1268df;
+  --blue-dark:#0752bb;
+  --blue-soft:#eaf5ff;
+  --yellow:#ffd21f;
+  --yellow-dark:#d9a900;
+  --yellow-soft:#fff9d7;
+  --bg:#eef8ff;
+  --card:#fff;
+  --text:#082b67;
+  --muted:#61738c;
+  --red:#ef476f;
+  --line:#d5e7f8;
+}
+html,body{
+  background:
+    radial-gradient(circle at 2% 4%, #1268df 0 13px, transparent 14px),
+    radial-gradient(circle at 5% 5%, #ffd21f 0 10px, transparent 11px),
+    radial-gradient(circle at 98% 5%, #ffd21f 0 13px, transparent 14px),
+    radial-gradient(circle at 95% 7%, #1268df 0 11px, transparent 12px),
+    radial-gradient(circle at 2% 96%, #ffd21f 0 14px, transparent 15px),
+    radial-gradient(circle at 98% 96%, #1268df 0 15px, transparent 16px),
+    linear-gradient(180deg,#f9fdff 0%,#eaf6ff 100%);
+}
+header{
+  background:linear-gradient(90deg,#0754bd,#1673ea);
+  border-bottom:4px solid var(--yellow);
+  box-shadow:0 3px 14px rgba(7,59,140,.18);
+}
+.logo-dot{
+  background:var(--yellow);
+  color:var(--navy);
+  box-shadow:0 0 0 3px rgba(255,255,255,.32);
+}
+.brand:after{
+  content:"";
+  width:11px;height:11px;border-radius:50%;
+  background:#fff;
+  box-shadow:15px -2px 0 var(--yellow),29px 2px 0 #5fc5ff;
+  margin-left:6px;
+}
+.badge{
+  background:rgba(255,255,255,.17);
+  border:1px solid rgba(255,255,255,.3);
+}
+.badge.run{background:#0ba866}
+.badge.end{background:#d72d4f}
+
+.topbar button{
+  box-shadow:0 3px 8px rgba(7,59,140,.10);
+  border:2px solid #cce1f7;
+}
+.btn-soft{background:#fff;color:#1454a5}
+.btn-red{background:#fff2f5;color:#b52043;border-color:#ffc9d5!important}
+
+/* Base card */
+.card{
+  position:relative;
+  background:#fff;
+  border:2px solid #cfe3f7;
+  box-shadow:0 5px 14px rgba(7,59,140,.10);
+  overflow:hidden;
+}
+.card:before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:0;
+  height:25px;
+  z-index:0;
+}
+.card:after{
+  content:"";
+  position:absolute;
+  right:7px;top:7px;
+  width:9px;height:9px;border-radius:50%;
+  background:#fff;
+  box-shadow:
+    -12px 3px 0 rgba(255,255,255,.92),
+    3px 12px 0 #ffd21f,
+    -8px 15px 0 #4eb8ff;
+  z-index:0;
+}
+.card > *{position:relative;z-index:1}
+
+/* Alternate the twelve timer cards blue / yellow */
+.card:nth-child(odd){
+  border-color:#9dd1ff;
+  background:
+    radial-gradient(circle at 8% 86%, rgba(18,104,223,.08) 0 18px, transparent 19px),
+    #ffffff;
+}
+.card:nth-child(odd):before{
+  background:linear-gradient(90deg,#1374e8,#55b8ff);
+}
+.card:nth-child(odd) .num{
+  background:#0d63d7;
+  color:#fff;
+}
+.card:nth-child(odd) .name{
+  color:#0b5dc5;
+  border-color:#b9ddff;
+}
+
+.card:nth-child(even){
+  border-color:#f3ce48;
+  background:
+    radial-gradient(circle at 8% 86%, rgba(255,210,31,.12) 0 18px, transparent 19px),
+    #fffefa;
+}
+.card:nth-child(even):before{
+  background:linear-gradient(90deg,#ffbf13,#ffdc3c);
+}
+.card:nth-child(even) .num{
+  background:#f4b600;
+  color:#fff;
+}
+.card:nth-child(even) .name{
+  color:#a87800;
+  border-color:#f6dc76;
+}
+
+.num{
+  border-radius:50%!important;
+  box-shadow:0 2px 0 rgba(0,0,0,.10);
+}
+.name{
+  background:rgba(255,255,255,.94);
+  font-weight:1000;
+}
+.clock{
+  color:#082b67;
+  text-shadow:0 1px 0 #fff;
+}
+.endtime{color:#365f91}
+.status{color:#6b7d93}
+
+.primary-presets{
+  grid-template-columns:repeat(3,1fr)!important;
+}
+.p30{
+  background:linear-gradient(180deg,#1673ea,#075bc9)!important;
+  color:#fff!important;
+  border:0!important;
+}
+.p60{
+  background:linear-gradient(180deg,#ffdb35,#ffc20b)!important;
+  color:#5e4300!important;
+  border:0!important;
+}
+.pfree{
+  background:linear-gradient(180deg,#20b9c0,#079ca8)!important;
+  color:#fff!important;
+  border:0!important;
+}
+.primary-presets button{
+  box-shadow:0 2px 5px rgba(7,59,140,.14);
+  font-weight:1000;
+}
+
+.start{
+  background:linear-gradient(180deg,#ffd93a,#ffbd0b);
+  color:#493500;
+  box-shadow:0 2px 5px rgba(209,158,0,.20);
+}
+.pause{
+  background:#eaf4ff;
+  color:#1556a5;
+  border:1px solid #b8d8fa;
+}
+.reset{
+  background:#fff;
+  color:#1556a5;
+  border:1px solid #9fc9f5;
+}
+
+/* Running state keeps each card's base blue/yellow identity */
+.card.running:nth-child(odd){
+  border-color:#1680ef;
+  box-shadow:0 0 0 2px rgba(18,104,223,.13),0 5px 14px rgba(7,59,140,.12);
+}
+.card.running:nth-child(even){
+  border-color:#efb900;
+  box-shadow:0 0 0 2px rgba(255,210,31,.16),0 5px 14px rgba(7,59,140,.12);
+}
+.card.warn5{box-shadow:0 0 0 3px rgba(255,183,0,.22)}
+.card.warn1{box-shadow:0 0 0 3px rgba(255,123,0,.25)}
+.card.done{
+  border-color:#ef476f!important;
+  background:#fff3f6!important;
+}
+
+/* Free time counts up. Before 120 min, preserve alternating blue/yellow card design. */
+.card.free:nth-child(odd){
+  border-color:#1680ef;
+}
+.card.free:nth-child(even){
+  border-color:#efb900;
+}
+.card.free .clock{color:#079ca8}
+.card.free .endtime{color:#147a84}
+
+/* At 120 minutes, override card color for a clear visual alert */
+.card.free120,
+.card.free120:nth-child(odd),
+.card.free120:nth-child(even){
+  border-color:#ef476f!important;
+  background:
+    radial-gradient(circle at 8% 86%, rgba(239,71,111,.10) 0 20px, transparent 21px),
+    #fff3f7!important;
+  box-shadow:0 0 0 3px rgba(239,71,111,.18),0 6px 18px rgba(7,59,140,.12)!important;
+}
+.card.free120:before{
+  background:linear-gradient(90deg,#ef476f,#ff7c9a)!important;
+}
+.card.free120 .num{
+  background:#e83e67!important;
+}
+.card.free120 .name{
+  color:#c52750!important;
+  border-color:#ffc1d0!important;
+}
+.card.free120 .clock{
+  color:#e83e67!important;
+}
+.card.free120 .endtime,
+.card.free120 .status{
+  color:#ae2144!important;
+  font-weight:1000;
+}
+
+.stopalarm{background:#dc3158;color:#fff}
+
+/* Hide unused old controls */
+.secondary,.extend,.customrow{display:none!important}
+
+@media (min-width:900px) and (orientation:landscape){
+  .card{border-radius:12px}
+  .card:before{height:21px}
+  .card:after{
+    right:5px;top:5px;
+    width:7px;height:7px;
+    box-shadow:-9px 2px 0 rgba(255,255,255,.92),2px 9px 0 #ffd21f,-6px 11px 0 #4eb8ff;
+  }
+  .primary-presets button{font-weight:1000}
+}
+</style>
+
+
 </head>
 <body>
 <noscript><div class="noscript">このタイマーはJavaScriptを使用します。ファイルのプレビュー画面ではなく、SafariでWeb公開したURLを開いてください。</div></noscript>
 <header>
 <div class="header-inner">
-  <div class="brand"><div class="logo-dot">HD</div><h1>キッズエリア 12タイマー</h1></div>
+  <div class="brand"><div class="logo-dot">★</div><h1>キッズエリア 12タイマー</h1></div>
   <div class="summary">
     <span class="badge" id="idleCount">待機 12</span>
     <span class="badge run" id="runCount">稼働 0</span>
@@ -311,7 +563,7 @@ function fmt(sec){
 function timeValue(t){return t.mode==="free"?t.elapsed:t.remaining}
 function endText(t){
   if(t.mode==="free"){
-    if(t.elapsed>=7200)return "120分を超えています";
+    if(t.elapsed>=7200)return "120分経過｜確認してください";
     return "フリータイム（最低120分）";
   }
   if(t.done)return "終了しました";
