@@ -657,6 +657,54 @@ header{
 }
 </style>
 
+
+<style id="large-timer-numbers">
+/* 左上のタイマー番号 1〜12 を大きく・見やすく */
+@media (min-width:900px) and (orientation:landscape){
+  .card-head{
+    height:34px!important;
+    min-height:34px!important;
+  }
+  .num{
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    flex:0 0 34px!important;
+    font-size:20px!important;
+    line-height:34px!important;
+    font-weight:1000!important;
+    border:2px solid #fff!important;
+    box-shadow:0 2px 5px rgba(0,0,0,.16)!important;
+  }
+  .name{
+    height:28px!important;
+    min-height:28px!important;
+    font-size:12px!important;
+  }
+}
+
+/* 高さが低い横画面でも枠内に収める */
+@media (min-width:900px) and (orientation:landscape) and (max-height:800px){
+  .card-head{
+    height:29px!important;
+    min-height:29px!important;
+  }
+  .num{
+    width:29px!important;
+    height:29px!important;
+    min-width:29px!important;
+    flex-basis:29px!important;
+    font-size:17px!important;
+    line-height:29px!important;
+  }
+  .name{
+    height:23px!important;
+    min-height:23px!important;
+    font-size:10px!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <noscript><div class="noscript">このタイマーはJavaScriptを使用します。ファイルのプレビュー画面ではなく、SafariでWeb公開したURLを開いてください。</div></noscript>
