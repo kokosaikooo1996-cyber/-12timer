@@ -237,324 +237,240 @@ button{border:0;border-radius:10px;padding:10px 12px;font-weight:900;cursor:poin
 </style>
 
 
-<style id="ballpool-theme">
+
+
+
+
+<style id="final-kids-design">
 :root{
-  --navy:#073b8c;
-  --blue:#1268df;
-  --blue-dark:#0752bb;
-  --blue-soft:#eaf5ff;
-  --yellow:#ffd21f;
-  --yellow-dark:#d9a900;
-  --yellow-soft:#fff9d7;
-  --bg:#eef8ff;
-  --card:#fff;
-  --text:#082b67;
-  --muted:#61738c;
-  --red:#ef476f;
-  --line:#d5e7f8;
+  --blue:#1169dc;
+  --blue2:#42a9ff;
+  --yellow:#ffd21a;
+  --yellow2:#ffbd00;
+  --navy:#0b2a63;
+  --teal:#08a8ae;
+  --pink:#ef4f7b;
 }
 html,body{
   background:
-    radial-gradient(circle at 2% 4%, #1268df 0 13px, transparent 14px),
-    radial-gradient(circle at 5% 5%, #ffd21f 0 10px, transparent 11px),
-    radial-gradient(circle at 98% 5%, #ffd21f 0 13px, transparent 14px),
-    radial-gradient(circle at 95% 7%, #1268df 0 11px, transparent 12px),
-    radial-gradient(circle at 2% 96%, #ffd21f 0 14px, transparent 15px),
-    radial-gradient(circle at 98% 96%, #1268df 0 15px, transparent 16px),
-    linear-gradient(180deg,#f9fdff 0%,#eaf6ff 100%);
+    radial-gradient(circle at 1.5% 3%, #1680ec 0 14px, transparent 15px),
+    radial-gradient(circle at 4% 4%, #ffd21a 0 10px, transparent 11px),
+    radial-gradient(circle at 98% 3%, #ffd21a 0 14px, transparent 15px),
+    radial-gradient(circle at 96% 5%, #1680ec 0 11px, transparent 12px),
+    linear-gradient(180deg,#f9fdff,#edf8ff)!important;
 }
 header{
-  background:linear-gradient(90deg,#0754bd,#1673ea);
-  border-bottom:4px solid var(--yellow);
-  box-shadow:0 3px 14px rgba(7,59,140,.18);
+  background:linear-gradient(90deg,#0d5dcc,#1782ef)!important;
+  border-bottom:4px solid var(--yellow)!important;
 }
 .logo-dot{
-  background:var(--yellow);
-  color:var(--navy);
-  box-shadow:0 0 0 3px rgba(255,255,255,.32);
+  background:var(--yellow)!important;
+  color:var(--navy)!important;
 }
-.brand:after{
-  content:"";
-  width:11px;height:11px;border-radius:50%;
-  background:#fff;
-  box-shadow:15px -2px 0 var(--yellow),29px 2px 0 #5fc5ff;
-  margin-left:6px;
-}
-.badge{
-  background:rgba(255,255,255,.17);
-  border:1px solid rgba(255,255,255,.3);
-}
-.badge.run{background:#0ba866}
-.badge.end{background:#d72d4f}
-
-.topbar button{
-  box-shadow:0 3px 8px rgba(7,59,140,.10);
-  border:2px solid #cce1f7;
-}
-.btn-soft{background:#fff;color:#1454a5}
-.btn-red{background:#fff2f5;color:#b52043;border-color:#ffc9d5!important}
-
-/* Base card */
 .card{
-  position:relative;
-  background:#fff;
-  border:2px solid #cfe3f7;
-  box-shadow:0 5px 14px rgba(7,59,140,.10);
-  overflow:hidden;
+  border-radius:15px!important;
+  box-shadow:0 5px 14px rgba(9,61,133,.12)!important;
+  overflow:hidden!important;
+  background:#fff!important;
 }
-.card:before{
-  content:"";
-  position:absolute;
-  left:0;right:0;top:0;
-  height:25px;
-  z-index:0;
-}
-.card:after{
-  content:"";
-  position:absolute;
-  right:7px;top:7px;
-  width:9px;height:9px;border-radius:50%;
-  background:#fff;
-  box-shadow:
-    -12px 3px 0 rgba(255,255,255,.92),
-    3px 12px 0 #ffd21f,
-    -8px 15px 0 #4eb8ff;
-  z-index:0;
-}
-.card > *{position:relative;z-index:1}
-
-/* Alternate the twelve timer cards blue / yellow */
 .card:nth-child(odd){
-  border-color:#9dd1ff;
-  background:
-    radial-gradient(circle at 8% 86%, rgba(18,104,223,.08) 0 18px, transparent 19px),
-    #ffffff;
+  border-color:#8fc9ff!important;
+}
+.card:nth-child(even){
+  border-color:#f2c92e!important;
 }
 .card:nth-child(odd):before{
-  background:linear-gradient(90deg,#1374e8,#55b8ff);
-}
-.card:nth-child(odd) .num{
-  background:#0d63d7;
-  color:#fff;
-}
-.card:nth-child(odd) .name{
-  color:#0b5dc5;
-  border-color:#b9ddff;
-}
-
-.card:nth-child(even){
-  border-color:#f3ce48;
-  background:
-    radial-gradient(circle at 8% 86%, rgba(255,210,31,.12) 0 18px, transparent 19px),
-    #fffefa;
+  background:linear-gradient(90deg,#1680ec,#54b7ff)!important;
 }
 .card:nth-child(even):before{
-  background:linear-gradient(90deg,#ffbf13,#ffdc3c);
+  background:linear-gradient(90deg,#ffbe0b,#ffdd36)!important;
 }
-.card:nth-child(even) .num{
-  background:#f4b600;
-  color:#fff;
-}
-.card:nth-child(even) .name{
-  color:#a87800;
-  border-color:#f6dc76;
-}
+.card:nth-child(odd) .num{background:#1267d7!important}
+.card:nth-child(even) .num{background:#eeb300!important}
+.card:nth-child(odd) .name{color:#0d5ec4!important}
+.card:nth-child(even) .name{color:#a87700!important}
 
-.num{
-  border-radius:50%!important;
-  box-shadow:0 2px 0 rgba(0,0,0,.10);
-}
-.name{
-  background:rgba(255,255,255,.94);
-  font-weight:1000;
-}
 .clock{
-  color:#082b67;
-  text-shadow:0 1px 0 #fff;
+  color:#0b2a63!important;
+  font-weight:1000!important;
+  letter-spacing:.01em!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:clip!important;
 }
-.endtime{color:#365f91}
-.status{color:#6b7d93}
+.card.free .clock{color:var(--teal)!important}
+.card.free120 .clock{color:var(--pink)!important}
 
 .primary-presets{
-  grid-template-columns:repeat(3,1fr)!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+.primary-presets button,
+.actions button{
+  white-space:nowrap!important;
+  overflow:hidden!important;
 }
 .p30{
-  background:linear-gradient(180deg,#1673ea,#075bc9)!important;
+  background:linear-gradient(180deg,#1879e8,#075ac6)!important;
   color:#fff!important;
-  border:0!important;
 }
 .p60{
-  background:linear-gradient(180deg,#ffdb35,#ffc20b)!important;
+  background:linear-gradient(180deg,#ffdc39,#ffc20b)!important;
   color:#5e4300!important;
-  border:0!important;
 }
 .pfree{
-  background:linear-gradient(180deg,#20b9c0,#079ca8)!important;
+  background:linear-gradient(180deg,#18bbc0,#079ca8)!important;
   color:#fff!important;
-  border:0!important;
 }
-.primary-presets button{
-  box-shadow:0 2px 5px rgba(7,59,140,.14);
-  font-weight:1000;
-}
-
 .start{
-  background:linear-gradient(180deg,#ffd93a,#ffbd0b);
-  color:#493500;
-  box-shadow:0 2px 5px rgba(209,158,0,.20);
+  background:linear-gradient(180deg,#ffdc3a,#ffbf08)!important;
+  color:#493500!important;
 }
-.pause{
-  background:#eaf4ff;
-  color:#1556a5;
-  border:1px solid #b8d8fa;
-}
-.reset{
-  background:#fff;
-  color:#1556a5;
-  border:1px solid #9fc9f5;
+.pause,.reset{
+  background:#fff!important;
+  color:#135aaa!important;
+  border:1px solid #9fcaf5!important;
 }
 
-/* Running state keeps each card's base blue/yellow identity */
-.card.running:nth-child(odd){
-  border-color:#1680ef;
-  box-shadow:0 0 0 2px rgba(18,104,223,.13),0 5px 14px rgba(7,59,140,.12);
-}
-.card.running:nth-child(even){
-  border-color:#efb900;
-  box-shadow:0 0 0 2px rgba(255,210,31,.16),0 5px 14px rgba(7,59,140,.12);
-}
-.card.warn5{box-shadow:0 0 0 3px rgba(255,183,0,.22)}
-.card.warn1{box-shadow:0 0 0 3px rgba(255,123,0,.25)}
-.card.done{
-  border-color:#ef476f!important;
-  background:#fff3f6!important;
-}
-
-/* Free time counts up. Before 120 min, preserve alternating blue/yellow card design. */
-.card.free:nth-child(odd){
-  border-color:#1680ef;
-}
-.card.free:nth-child(even){
-  border-color:#efb900;
-}
-.card.free .clock{color:#079ca8}
-.card.free .endtime{color:#147a84}
-
-/* At 120 minutes, override card color for a clear visual alert */
+/* 120分超過だけピンクに切替 */
 .card.free120,
 .card.free120:nth-child(odd),
 .card.free120:nth-child(even){
-  border-color:#ef476f!important;
-  background:
-    radial-gradient(circle at 8% 86%, rgba(239,71,111,.10) 0 20px, transparent 21px),
-    #fff3f7!important;
-  box-shadow:0 0 0 3px rgba(239,71,111,.18),0 6px 18px rgba(7,59,140,.12)!important;
+  border-color:#ef4f7b!important;
+  background:#fff4f7!important;
 }
 .card.free120:before{
-  background:linear-gradient(90deg,#ef476f,#ff7c9a)!important;
+  background:linear-gradient(90deg,#ef4f7b,#ff8aa6)!important;
 }
-.card.free120 .num{
-  background:#e83e67!important;
-}
-.card.free120 .name{
-  color:#c52750!important;
-  border-color:#ffc1d0!important;
-}
-.card.free120 .clock{
-  color:#e83e67!important;
-}
-.card.free120 .endtime,
-.card.free120 .status{
-  color:#ae2144!important;
-  font-weight:1000;
-}
+.card.free120 .num{background:#e94770!important}
+.card.free120 .name{color:#c52d54!important}
 
-.stopalarm{background:#dc3158;color:#fff}
-
-/* Hide unused old controls */
-.secondary,.extend,.customrow{display:none!important}
-
+/* 横画面：12個を4列×3段、文字が枠から出ないよう最適化 */
 @media (min-width:900px) and (orientation:landscape){
-  .card{border-radius:12px}
-  .card:before{height:21px}
-  .card:after{
-    right:5px;top:5px;
-    width:7px;height:7px;
-    box-shadow:-9px 2px 0 rgba(255,255,255,.92),2px 9px 0 #ffd21f,-6px 11px 0 #4eb8ff;
+  html,body{height:100%;height:100dvh;overflow:hidden!important}
+  header{height:44px!important;padding:3px 9px!important}
+  .header-inner{height:38px!important;max-width:none!important}
+  h1{font-size:20px!important}
+  .badge{font-size:11px!important;padding:4px 8px!important}
+
+  main{
+    height:calc(100dvh - 44px)!important;
+    max-width:none!important;
+    padding:4px 7px 5px!important;
+    display:grid!important;
+    grid-template-rows:29px minmax(0,1fr)!important;
+    gap:4px!important;
+    overflow:hidden!important;
   }
-  .primary-presets button{font-weight:1000}
-}
-</style>
-
-
-
-<style id="large-readable-text">
-/* 店舗モニターで離れて見ても分かりやすい文字サイズ */
-h1{
-  font-size:clamp(25px,2.6vw,38px)!important;
-  font-weight:1000!important;
-}
-.badge{
-  font-size:15px!important;
-  padding:8px 12px!important;
-}
-.topbar button{
-  font-size:16px!important;
-  font-weight:1000!important;
-}
-.num{
-  font-size:20px!important;
-  font-weight:1000!important;
-}
-.name{
-  font-size:18px!important;
-  font-weight:1000!important;
-}
-.clock{
-  font-size:clamp(34px,4vw,56px)!important;
-  line-height:1!important;
-  font-weight:1000!important;
-  letter-spacing:.02em!important;
-}
-.endtime{
-  font-size:16px!important;
-  font-weight:900!important;
-}
-.status{
-  font-size:15px!important;
-  font-weight:900!important;
-}
-.primary-presets button{
-  font-size:18px!important;
-  min-height:48px!important;
-  font-weight:1000!important;
-}
-.actions button{
-  font-size:16px!important;
-  min-height:43px!important;
-  font-weight:1000!important;
-}
-.stopalarm{
-  font-size:16px!important;
-  font-weight:1000!important;
-}
-@media (min-width:900px) and (orientation:landscape){
-  h1{font-size:clamp(24px,2.2vw,34px)!important}
-  .badge{font-size:14px!important;padding:6px 10px!important}
-  .topbar button{font-size:15px!important}
-  .num{font-size:18px!important}
-  .name{font-size:17px!important}
-  .clock{font-size:clamp(31px,3.6vw,49px)!important}
-  .endtime{font-size:15px!important}
-  .status{font-size:14px!important}
+  .topbar{height:29px!important;margin:0!important}
+  .topbar button{
+    height:29px!important;
+    min-height:29px!important;
+    padding:2px 8px!important;
+    font-size:11px!important;
+  }
+  .grid{
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-template-rows:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  .card{
+    min-width:0!important;
+    min-height:0!important;
+    height:100%!important;
+    padding:4px 5px!important;
+    border-width:2px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:space-between!important;
+  }
+  .card:before{height:21px!important}
+  .card-head{height:24px!important;min-height:24px!important;gap:4px!important}
+  .num{
+    width:24px!important;height:24px!important;
+    font-size:13px!important;
+    flex:0 0 24px!important;
+  }
+  .name{
+    height:24px!important;min-height:24px!important;
+    padding:2px 5px!important;
+    font-size:11px!important;
+  }
+  .clock{
+    font-size:clamp(26px,4.0vh,38px)!important;
+    line-height:.96!important;
+    margin:2px 0 0!important;
+  }
+  .endtime{
+    font-size:10px!important;
+    min-height:12px!important;
+    line-height:12px!important;
+  }
+  .status{
+    font-size:9px!important;
+    min-height:10px!important;
+    line-height:10px!important;
+    margin:0!important;
+  }
+  .primary-presets{
+    height:27px!important;
+    min-height:27px!important;
+    gap:3px!important;
+    margin:1px 0!important;
+  }
   .primary-presets button{
-    font-size:17px!important;
-    min-height:42px!important;
+    height:27px!important;
+    min-height:27px!important;
+    padding:2px 2px!important;
+    font-size:11px!important;
+    border-radius:6px!important;
+  }
+  .actions{
+    height:25px!important;
+    min-height:25px!important;
+    gap:3px!important;
   }
   .actions button{
-    font-size:15px!important;
-    min-height:38px!important;
+    height:25px!important;
+    min-height:25px!important;
+    padding:2px!important;
+    font-size:10px!important;
+    border-radius:6px!important;
   }
+  .secondary,.extend,.customrow{display:none!important}
+  .stopalarm{
+    height:22px!important;
+    min-height:22px!important;
+    font-size:9px!important;
+    margin-top:2px!important;
+  }
+  .notice{display:none!important}
+}
+
+/* 1366×768など高さが低いモニター向け */
+@media (min-width:900px) and (orientation:landscape) and (max-height:800px){
+  header{height:40px!important}
+  main{
+    height:calc(100dvh - 40px)!important;
+    grid-template-rows:25px minmax(0,1fr)!important;
+    padding:3px 5px 4px!important;
+    gap:3px!important;
+  }
+  .topbar,.topbar button{height:25px!important;min-height:25px!important}
+  .grid{gap:3px!important}
+  .card{padding:3px 4px!important;border-radius:10px!important}
+  .card-head{height:20px!important;min-height:20px!important}
+  .num{width:20px!important;height:20px!important;font-size:10px!important;flex-basis:20px!important}
+  .name{height:20px!important;min-height:20px!important;font-size:9px!important}
+  .clock{font-size:clamp(22px,3.8vh,29px)!important}
+  .endtime{font-size:8px!important}
+  .status{font-size:7px!important}
+  .primary-presets{height:22px!important;min-height:22px!important}
+  .primary-presets button{height:22px!important;min-height:22px!important;font-size:9px!important}
+  .actions{height:20px!important;min-height:20px!important}
+  .actions button{height:20px!important;min-height:20px!important;font-size:8px!important}
 }
 </style>
 
