@@ -951,12 +951,37 @@ header{
  #printSheet table{width:100%;border-collapse:collapse;font-size:19px}
  #printSheet th,#printSheet td{border:2px solid #222;padding:13px 11px}
  #printSheet th{background:#eee!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
- #printSheet td:nth-child(2),#printSheet td:nth-child(3){text-align:right;font-weight:800}
+ #printSheet td:nth-child(2),#printSheet td:nth-child(3),#printSheet td:nth-child(4){text-align:right;font-weight:800}
  #printSheet .grand{margin-top:22px;border:3px solid #111;padding:17px;display:flex;justify-content:space-between;align-items:center;font-size:22px;font-weight:1000}
  #printSheet .grand strong{font-size:32px}
  #printSheet .note{margin-top:15px;font-size:12px;color:#555}
 }
 </style>
+
+<style id="child-count-style">
+.child-row{
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  min-height:24px;margin:1px 0;border-radius:7px;
+  background:#edf6ff;color:#0b4f9f;font-weight:1000;
+}
+.card:nth-child(even) .child-row{background:#fff8cf;color:#8a6500}
+.child-row span{font-size:10px}
+.child-row button{
+  width:24px;height:22px;min-height:22px;padding:0;border-radius:6px;
+  font-size:15px;line-height:1;font-weight:1000;
+  background:#fff;color:#0b5fc7;border:1px solid #a9cff5;
+}
+.child-row .child-count{min-width:24px;text-align:center;font-size:16px}
+.child-row small{font-size:8px}
+@media (min-width:900px) and (orientation:landscape) and (max-height:800px){
+  .child-row{height:19px;min-height:19px;margin:0;gap:3px}
+  .child-row span{font-size:8px}
+  .child-row button{width:19px;height:18px;min-height:18px;font-size:12px}
+  .child-row .child-count{font-size:13px;min-width:18px}
+  .child-row small{font-size:7px}
+}
+</style>
+
 </head>
 <body>
 <noscript><div class="noscript">このタイマーはJavaScriptを使用します。ファイルのプレビュー画面ではなく、SafariでWeb公開したURLを開いてください。</div></noscript>
@@ -1014,7 +1039,8 @@ function baseTimer(i){
     done:false,
     warned5:false,
     warned1:false,
-    sessionCounted:false
+    sessionCounted:false,
+    children:1
   };
 }
 let timers=Array.from({length:COUNT},(_,i)=>baseTimer(i));
@@ -1024,7 +1050,7 @@ function todayKey(){
   const d=new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 }
-let dailyCounts={date:todayKey(),m30:0,m60:0,free:0};
+let dailyCounts={date:todayKey(),m30:0,m60:0,free:0,kids30:0,kids60:0,kidsFree:0};
 
 function loadDailyCounts(){
   try{
@@ -1034,21 +1060,24 @@ function loadDailyCounts(){
         date:saved.date,
         m30:Number(saved.m30)||0,
         m60:Number(saved.m60)||0,
-        free:Number(saved.free)||0
+        free:Number(saved.free)||0,
+        kids30:Number(saved.kids30)||0,
+        kids60:Number(saved.kids60)||0,
+        kidsFree:Number(saved.kidsFree)||0
       };
     }else{
-      dailyCounts={date:todayKey(),m30:0,m60:0,free:0};
+      dailyCounts={date:todayKey(),m30:0,m60:0,free:0,kids30:0,kids60:0,kidsFree:0};
       localStorage.setItem(COUNT_KEY,JSON.stringify(dailyCounts));
     }
   }catch(e){
-    dailyCounts={date:todayKey(),m30:0,m60:0,free:0};
+    dailyCounts={date:todayKey(),m30:0,m60:0,free:0,kids30:0,kids60:0,kidsFree:0};
   }
   updateDailyCountDisplay();
 }
 
 function ensureCurrentDay(){
   if(dailyCounts.date!==todayKey()){
-    dailyCounts={date:todayKey(),m30:0,m60:0,free:0};
+    dailyCounts={date:todayKey(),m30:0,m60:0,free:0,kids30:0,kids60:0,kidsFree:0};
     localStorage.setItem(COUNT_KEY,JSON.stringify(dailyCounts));
     updateDailyCountDisplay();
   }
@@ -1062,15 +1091,23 @@ function updateDailyCountDisplay(){
   if(a)a.textContent=dailyCounts.m30;
   if(b)b.textContent=dailyCounts.m60;
   if(c)c.textContent=dailyCounts.free;
-  const total=(dailyCounts.m30*500)+(dailyCounts.m60*800)+(dailyCounts.free*1000);
+  const total=(dailyCounts.kids30*500)+(dailyCounts.kids60*800)+(dailyCounts.kidsFree*1000);
   if(sales)sales.textContent=`¥${total.toLocaleString("ja-JP")}`;
 }
 
 function addDailyCount(t){
   ensureCurrentDay();
-  if(t.mode==="free") dailyCounts.free++;
-  else if(t.duration===1800) dailyCounts.m30++;
-  else if(t.duration===3600) dailyCounts.m60++;
+  const kids=Math.max(1,Number(t.children)||1);
+  if(t.mode==="free"){
+    dailyCounts.free++;
+    dailyCounts.kidsFree+=kids;
+  }else if(t.duration===1800){
+    dailyCounts.m30++;
+    dailyCounts.kids30+=kids;
+  }else if(t.duration===3600){
+    dailyCounts.m60++;
+    dailyCounts.kids60+=kids;
+  }
   localStorage.setItem(COUNT_KEY,JSON.stringify(dailyCounts));
   updateDailyCountDisplay();
 }
@@ -1151,6 +1188,13 @@ function render(){
       <div class="clock">${fmt(timeValue(t))}</div>
       <div class="endtime">${endText(t)}</div>
       <div class="status">${statusText(t)}</div>
+      <div class="child-row">
+        <span>子ども人数</span>
+        <button type="button" data-a="childMinus">−</button>
+        <strong class="child-count">${t.children||1}</strong>
+        <button type="button" data-a="childPlus">＋</button>
+        <small>人</small>
+      </div>
       <div class="primary-presets">
         <button class="p30" data-a="countdown" data-min="30">30分</button>
         <button class="p60" data-a="countdown" data-min="60">60分</button>
@@ -1193,6 +1237,20 @@ function onClick(e,i){
   const b=e.target.closest("button"); if(!b)return;
   unlockAudio();
   const a=b.dataset.a,t=timers[i];
+  if(a==="childMinus"){
+    if(!t.running && !t.sessionCounted){
+      t.children=Math.max(1,(Number(t.children)||1)-1);
+      save();render();
+    }
+    return;
+  }
+  if(a==="childPlus"){
+    if(!t.running && !t.sessionCounted){
+      t.children=Math.min(20,(Number(t.children)||1)+1);
+      save();render();
+    }
+    return;
+  }
   if(a==="countdown")setCountdown(i,Number(b.dataset.min)*60);
   if(a==="free")setFree(i);
   if(a==="start"){
@@ -1229,7 +1287,7 @@ function onClick(e,i){
   if(a==="stopalarm"){
     alarmSet.delete(t.id);
     t.done=false;t.running=false;t.endAt=null;
-    t.remaining=t.duration;t.warned5=false;t.warned1=false;t.sessionCounted=false;
+    t.remaining=t.duration;t.warned5=false;t.warned1=false;t.sessionCounted=false;t.children=1;
     save();stopAlarmIfNone();render();
   }
 }
@@ -1327,11 +1385,14 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden){load();re
 window.addEventListener("beforeunload",save);
 function prepareAndPrintSummary(){
  ensureCurrentDay();
- const d=new Date(), s30=dailyCounts.m30*500, s60=dailyCounts.m60*800, sf=dailyCounts.free*1000, total=s30+s60+sf;
+ const d=new Date(), s30=dailyCounts.kids30*500, s60=dailyCounts.kids60*800, sf=dailyCounts.kidsFree*1000, total=s30+s60+sf;
  document.getElementById("printDate").textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
  document.getElementById("print30").textContent=`${dailyCounts.m30}回`;
  document.getElementById("print60").textContent=`${dailyCounts.m60}回`;
  document.getElementById("printFree").textContent=`${dailyCounts.free}回`;
+ document.getElementById("printKids30").textContent=`${dailyCounts.kids30}人`;
+ document.getElementById("printKids60").textContent=`${dailyCounts.kids60}人`;
+ document.getElementById("printKidsFree").textContent=`${dailyCounts.kidsFree}人`;
  document.getElementById("printSales30").textContent=`¥${s30.toLocaleString("ja-JP")}`;
  document.getElementById("printSales60").textContent=`¥${s60.toLocaleString("ja-JP")}`;
  document.getElementById("printSalesFree").textContent=`¥${sf.toLocaleString("ja-JP")}`;
@@ -1346,11 +1407,11 @@ loadDailyCounts();load();render();setInterval(tick,250);
 <div id="printSheet">
 <h1>キッズエリア 日計表</h1>
 <div class="date" id="printDate"></div>
-<table><thead><tr><th>コース</th><th>計測回数</th><th>売上</th></tr></thead>
+<table><thead><tr><th>コース</th><th>計測回数</th><th>子ども人数</th><th>売上</th></tr></thead>
 <tbody>
-<tr><td>30分（500円）</td><td id="print30">0回</td><td id="printSales30">¥0</td></tr>
-<tr><td>60分（800円）</td><td id="print60">0回</td><td id="printSales60">¥0</td></tr>
-<tr><td>フリータイム（1,000円）</td><td id="printFree">0回</td><td id="printSalesFree">¥0</td></tr>
+<tr><td>30分（500円/人）</td><td id="print30">0回</td><td id="printKids30">0人</td><td id="printSales30">¥0</td></tr>
+<tr><td>60分（800円/人）</td><td id="print60">0回</td><td id="printKids60">0人</td><td id="printSales60">¥0</td></tr>
+<tr><td>フリータイム（1,000円/人）</td><td id="printFree">0回</td><td id="printKidsFree">0人</td><td id="printSalesFree">¥0</td></tr>
 </tbody></table>
 <div class="grand"><span>本日の売上合計</span><strong id="printTotal">¥0</strong></div>
 <div class="note">計測回数は各タイマーの新規スタート時に自動集計されています。</div>
