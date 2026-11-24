@@ -982,7 +982,86 @@ header{
 }
 </style>
 
-</head>
+
+<style id="coupon-mode-style">
+.countCoupon{
+  background:#f2e8ff;
+  color:#6d2fb0;
+}
+.coupon-btn{
+  width:100%;
+  min-height:30px;
+  margin:0 0 5px;
+  border:2px solid #8b5cf6;
+  border-radius:8px;
+  background:linear-gradient(180deg,#f5efff,#e9ddff);
+  color:#5a2496;
+  font-size:12px;
+  font-weight:1000;
+  cursor:pointer;
+}
+.card.coupon{
+  border-color:#a77af4!important;
+}
+.card.coupon-running{
+  border-color:#8b5cf6!important;
+  box-shadow:0 0 0 3px rgba(139,92,246,.18),0 5px 14px rgba(0,0,0,.10)!important;
+}
+.card.coupon-running .clock{
+  color:#6d2fb0!important;
+}
+@media (min-width:900px) and (orientation:landscape){
+  .coupon-btn{
+    min-height:25px!important;
+    height:25px!important;
+    font-size:10px!important;
+    margin-bottom:3px!important;
+  }
+}
+@media (min-width:900px) and (orientation:landscape) and (max-height:800px){
+  .coupon-btn{
+    min-height:19px!important;
+    height:19px!important;
+    font-size:8px!important;
+    margin-bottom:1px!important;
+    border-width:1px!important;
+  }
+  .countCoupon{min-width:47px!important}
+}
+</style>
+
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png">
+<style>
+@media screen and (orientation:landscape) and (min-width:700px){
+html,body{height:100%;height:100dvh;overflow:hidden!important}body{display:flex!important;flex-direction:column!important;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)!important}
+header{flex:none!important;height:auto!important;padding:5px 8px!important;position:relative!important}.header-inner{height:auto!important;min-height:0!important;display:flex!important;flex-wrap:wrap!important;justify-content:space-between!important;gap:4px!important;position:relative!important}.header-inner>div{position:static!important;transform:none!important}.brand{gap:4px!important}.brand h1{font-size:16px!important}.logo-dot{width:22px!important;height:22px!important}.daily-summary{display:flex!important;align-items:center!important;gap:4px!important;position:static!important;transform:none!important}.count-items{display:flex!important;gap:3px!important}.count-title{display:none!important}.count-box{min-width:42px!important;padding:2px 4px!important}.count-box strong{font-size:17px!important}.count-box span,.count-box small{font-size:10px!important}.sales-total{min-width:80px!important}.sales-total strong{font-size:18px!important}.summary{position:static!important;display:flex!important;gap:3px!important}.badge{min-width:0!important;font-size:11px!important;padding:4px!important}.print-summary-btn{font-size:11px!important;padding:6px!important}
+main{flex:1!important;min-height:0!important;height:auto!important;width:100%!important;max-width:none!important;display:grid!important;grid-template-rows:28px minmax(0,1fr)!important;padding:4px!important;gap:4px!important}.topbar{height:28px!important;min-height:0!important;display:flex!important;gap:5px!important}.topbar button{height:27px!important;padding:2px 8px!important;font-size:11px!important}.notice{display:none!important}.grid{height:100%!important;min-height:0!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:repeat(3,minmax(0,1fr))!important;gap:5px!important}.card{height:100%!important;min-height:0!important;overflow:hidden!important;display:grid!important;grid-template-rows:22px minmax(23px,1fr) 14px 13px 26px 27px 25px 27px 23px!important;gap:2px!important;padding:4px!important;position:relative!important}.card-head{height:22px!important;min-height:0!important;margin:0!important}.num{font-size:20px!important}.name{font-size:13px!important;min-width:0!important}.clock{font-size:clamp(25px,4.8vh,43px)!important;line-height:1!important;margin:0!important;align-self:center!important}.endtime,.status{position:static!important;transform:none!important;font-size:10px!important;line-height:1.1!important;margin:0!important;min-height:0!important;height:auto!important}.child-row{height:26px!important;min-height:0!important;margin:0!important}.child-row button{height:25px!important;width:32px!important;min-height:0!important;font-size:18px!important}.child-row span{font-size:11px!important}.primary-presets,.actions{height:auto!important;min-height:0!important;margin:0!important;gap:3px!important}.primary-presets button,.actions button,.coupon-btn,.stopalarm{height:100%!important;min-height:0!important;margin:0!important;padding:0 2px!important;font-size:11px!important;line-height:1.1!important}.primary-presets button{font-size:13px!important}.coupon-btn{font-size:12px!important}.stopalarm{font-size:10px!important}
+}
+@media screen and (orientation:landscape) and (max-height:650px){.card{grid-template-rows:18px minmax(20px,1fr) 12px 11px 21px 23px 20px 23px 18px!important;gap:1px!important}.child-row,.child-row button{height:21px!important}.clock{font-size:25px!important}.num{font-size:17px!important}}
+</style><style>
+@media screen and (orientation:landscape) and (min-width:700px){
+.header-inner{max-width:none!important;margin:0!important;width:100%!important}
+main{margin:0!important;padding:2px!important;gap:2px!important;grid-template-rows:27px minmax(0,1fr)!important}
+.topbar{margin:0!important;flex-wrap:nowrap!important}
+.grid{margin:0!important;width:100%!important;gap:3px!important;align-content:stretch!important}
+.card{padding:3px!important;border-radius:10px!important;gap:2px!important;grid-template-rows:minmax(18px,.8fr) minmax(24px,1.65fr) minmax(11px,.48fr) minmax(11px,.48fr) minmax(19px,.9fr) minmax(20px,1fr) minmax(18px,.85fr) minmax(20px,1fr)!important}
+.card.done{grid-template-rows:minmax(18px,.8fr) minmax(24px,1.65fr) minmax(11px,.48fr) minmax(11px,.48fr) minmax(19px,.9fr) minmax(20px,1fr) minmax(18px,.85fr) minmax(20px,1fr) minmax(19px,.85fr)!important}
+.card-head,.child-row{height:100%!important;min-height:0!important}.card-head .num{height:100%!important;min-height:0!important}.card-head .name{height:100%!important;min-height:0!important;padding:0 4px!important}.child-row button{height:100%!important}.clock{font-size:clamp(25px,5.2vh,48px)!important}.card:not(.done) .stopalarm{display:none!important}
+}
+.card.done:nth-child(n){background:#d71920!important;border-color:#8e1015!important;box-shadow:inset 0 0 0 2px #ff8c8c!important;animation:none!important}
+.card.done:nth-child(n):before{background:#ffb0b0!important}
+.card.done:nth-child(n) .clock,.card.done:nth-child(n) .endtime,.card.done:nth-child(n) .status{color:#fff!important;text-shadow:none!important}
+.card.done:nth-child(n) .num{background:#8e1015!important;color:white!important}
+.card.done .stopalarm{display:block!important;background:#fff!important;color:#b31219!important;font-weight:900!important}
+</style><style id="ipad-large-controls">
+@media screen and (orientation:landscape) and (min-width:700px){
+.header-inner{gap:4px!important}.brand h1{font-size:19px!important}.badge{font-size:13px!important}.count-box span,.count-box small{font-size:12px!important}.count-box strong{font-size:22px!important}.sales-total strong{font-size:24px!important}.print-summary-btn{font-size:14px!important}.topbar button{font-size:14px!important;height:32px!important}.topbar{height:32px!important}main{grid-template-rows:32px minmax(0,1fr)!important}
+.card{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:27px minmax(30px,1fr) 15px 29px 30px 28px 31px!important;gap:2px!important;padding:3px!important;min-height:0!important;align-items:stretch!important}
+.card-head,.clock,.child-row,.primary-presets,.coupon-btn,.actions,.stopalarm{grid-column:1/-1!important}.card-head{grid-row:1!important}.clock{grid-row:2!important;font-size:clamp(30px,6vh,52px)!important;line-height:1!important}.endtime{grid-row:3!important;grid-column:1!important;font-size:11px!important;line-height:15px!important}.status{grid-row:3!important;grid-column:2!important;font-size:11px!important;line-height:15px!important}.child-row{grid-row:4!important}.primary-presets{grid-row:5!important}.coupon-btn{grid-row:6!important}.actions,.stopalarm{grid-row:7!important}.card.done{grid-template-rows:27px minmax(30px,1fr) 15px 29px 30px 28px 31px!important}.card.done .actions{visibility:hidden!important}.card.done .stopalarm{z-index:2!important;font-size:15px!important}.num{font-size:24px!important;line-height:1!important;width:34px!important;flex-basis:34px!important}.name{font-size:16px!important}.child-row span{font-size:13px!important}.child-row small{font-size:12px!important}.child-row .child-count{font-size:20px!important}.child-row button{width:40px!important;font-size:23px!important}.primary-presets button{font-size:17px!important}.actions button{font-size:14px!important}.coupon-btn{font-size:15px!important}.card:before{display:none!important}
+/* Short Safari viewports: allow vertical scrolling instead of clipping controls. */
+html,body{overflow:auto!important;height:auto!important;min-height:100dvh!important}body{height:100dvh!important}main{overflow:visible!important;min-height:610px!important}.grid{min-height:570px!important;grid-template-rows:repeat(3,minmax(188px,1fr))!important}.card{overflow:hidden!important}
+}
+</style></head>
 <body>
 <noscript><div class="noscript">このタイマーはJavaScriptを使用します。ファイルのプレビュー画面ではなく、SafariでWeb公開したURLを開いてください。</div></noscript>
 <header>
@@ -995,13 +1074,13 @@ header{
         <div class="count-box count30"><span>30分</span><strong id="count30">0</strong><small>回</small></div>
         <div class="count-box count60"><span>60分</span><strong id="count60">0</strong><small>回</small></div>
         <div class="count-box countFree"><span>フリー</span><strong id="countFree">0</strong><small>回</small></div>
+        <div class="count-box countCoupon"><span>お試し</span><strong id="countCoupon">0</strong><small>回</small></div>
       </div>
     </div>
     <div class="sales-total" aria-label="本日の売上合計">
       <span>本日の売上合計</span>
       <strong id="salesTotal">¥0</strong>
     </div><button id="printSummary" class="print-summary-btn" type="button">日計を印刷</button>
-  </div>
   </div>
   <div class="summary">
     <span class="badge" id="idleCount">待機 12</span>
@@ -1050,7 +1129,7 @@ function todayKey(){
   const d=new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 }
-let dailyCounts={date:todayKey(),m30:0,m60:0,free:0,kids30:0,kids60:0,kidsFree:0};
+let dailyCounts={date:todayKey(),m30:0,m60:0,free:0,coupon:0,kids30:0,kids60:0,kidsFree:0};
 
 function loadDailyCounts(){
   try{
@@ -1061,23 +1140,24 @@ function loadDailyCounts(){
         m30:Number(saved.m30)||0,
         m60:Number(saved.m60)||0,
         free:Number(saved.free)||0,
+        coupon:Number(saved.coupon)||0,
         kids30:Number(saved.kids30)||0,
         kids60:Number(saved.kids60)||0,
         kidsFree:Number(saved.kidsFree)||0
       };
     }else{
-      dailyCounts={date:todayKey(),m30:0,m60:0,free:0,kids30:0,kids60:0,kidsFree:0};
+      dailyCounts={date:todayKey(),m30:0,m60:0,free:0,coupon:0,kids30:0,kids60:0,kidsFree:0};
       localStorage.setItem(COUNT_KEY,JSON.stringify(dailyCounts));
     }
   }catch(e){
-    dailyCounts={date:todayKey(),m30:0,m60:0,free:0,kids30:0,kids60:0,kidsFree:0};
+    dailyCounts={date:todayKey(),m30:0,m60:0,free:0,coupon:0,kids30:0,kids60:0,kidsFree:0};
   }
   updateDailyCountDisplay();
 }
 
 function ensureCurrentDay(){
   if(dailyCounts.date!==todayKey()){
-    dailyCounts={date:todayKey(),m30:0,m60:0,free:0,kids30:0,kids60:0,kidsFree:0};
+    dailyCounts={date:todayKey(),m30:0,m60:0,free:0,coupon:0,kids30:0,kids60:0,kidsFree:0};
     localStorage.setItem(COUNT_KEY,JSON.stringify(dailyCounts));
     updateDailyCountDisplay();
   }
@@ -1087,10 +1167,12 @@ function updateDailyCountDisplay(){
   const a=document.getElementById("count30");
   const b=document.getElementById("count60");
   const c=document.getElementById("countFree");
+  const d=document.getElementById("countCoupon");
   const sales=document.getElementById("salesTotal");
   if(a)a.textContent=dailyCounts.m30;
   if(b)b.textContent=dailyCounts.m60;
   if(c)c.textContent=dailyCounts.free;
+  if(d)d.textContent=dailyCounts.coupon;
   const total=(dailyCounts.kids30*500)+(dailyCounts.kids60*800)+(dailyCounts.kidsFree*1000);
   if(sales)sales.textContent=`¥${total.toLocaleString("ja-JP")}`;
 }
@@ -1098,7 +1180,9 @@ function updateDailyCountDisplay(){
 function addDailyCount(t){
   ensureCurrentDay();
   const kids=Math.max(1,Number(t.children)||1);
-  if(t.mode==="free"){
+  if(t.mode==="coupon"){
+    dailyCounts.coupon++;
+  }else if(t.mode==="free"){
     dailyCounts.free++;
     dailyCounts.kidsFree+=kids;
   }else if(t.duration===1800){
@@ -1141,6 +1225,14 @@ function fmt(sec){
 }
 function timeValue(t){return t.mode==="free"?t.elapsed:t.remaining}
 function endText(t){
+  if(t.mode==="coupon"){
+    if(t.done)return "お試しクーポン終了";
+    if(t.running&&t.endAt){
+      const d=new Date(t.endAt);
+      return `15分無料｜終了予定 ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+    }
+    return "お試しクーポン｜15分無料";
+  }
   if(t.mode==="free"){
     if(t.elapsed>=7200)return "120分経過｜確認してください";
     return "フリータイム（最低120分）";
@@ -1153,6 +1245,12 @@ function endText(t){
   return "終了予定 --:--";
 }
 function statusText(t){
+  if(t.mode==="coupon"){
+    if(t.done)return "クーポン終了・アラーム中";
+    if(t.running)return "お試しクーポン計測中";
+    if(t.remaining<t.duration)return "クーポン一時停止中";
+    return "お試しクーポン待機";
+  }
   if(t.mode==="free"){
     if(t.elapsed>=7200)return "フリータイム 120分経過";
     if(t.running)return "フリータイム計測中";
@@ -1168,6 +1266,13 @@ function statusText(t){
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 function cardClass(t){
+  if(t.mode==="coupon"){
+    if(t.done)return "card done";
+    if(t.running&&t.remaining<=60)return "card warn1";
+    if(t.running&&t.remaining<=300)return "card warn5";
+    if(t.running)return "card coupon-running";
+    return "card coupon";
+  }
   if(t.mode==="free"){
     if(t.elapsed>=7200)return "card free120";
     return "card free";
@@ -1200,6 +1305,7 @@ function render(){
         <button class="p60" data-a="countdown" data-min="60">60分</button>
         <button class="pfree" data-a="free">フリー</button>
       </div>
+      <button class="coupon-btn" data-a="coupon">お試しクーポン 15分無料</button>
       <div class="actions">
         <button class="start" data-a="start">${t.running?"稼働中":"スタート"}</button>
         <button class="pause" data-a="pause">一時停止</button>
@@ -1220,6 +1326,14 @@ function setCountdown(i,sec){
   });
   alarmSet.delete(t.id);stopAlarmIfNone();save();render();
 }
+function setCoupon(i){
+  const t=timers[i];
+  Object.assign(t,{
+    mode:"coupon",duration:900,remaining:900,elapsed:0,running:false,
+    endAt:null,startAt:null,done:false,warned5:false,warned1:false,sessionCounted:false
+  });
+  alarmSet.delete(t.id);stopAlarmIfNone();save();render();
+}
 function setFree(i){
   const t=timers[i];
   Object.assign(t,{
@@ -1231,6 +1345,7 @@ function setFree(i){
 function resetTimer(i){
   const t=timers[i];
   if(t.mode==="free")setFree(i);
+  else if(t.mode==="coupon")setCoupon(i);
   else setCountdown(i,t.duration);
 }
 function onClick(e,i){
@@ -1251,10 +1366,12 @@ function onClick(e,i){
     }
     return;
   }
+  if(["countdown","free","coupon","reset"].includes(a)&&t.sessionCounted&&!confirm("計測を終了して設定を変更しますか？"))return;
   if(a==="countdown")setCountdown(i,Number(b.dataset.min)*60);
   if(a==="free")setFree(i);
+  if(a==="coupon")setCoupon(i);
   if(a==="start"){
-    if(t.done){t.done=false;t.remaining=t.duration;alarmSet.delete(t.id)}
+    if(t.done){return;}
     if(!t.running){
       const now=Date.now();
       if(!t.sessionCounted){
@@ -1287,7 +1404,7 @@ function onClick(e,i){
   if(a==="stopalarm"){
     alarmSet.delete(t.id);
     t.done=false;t.running=false;t.endAt=null;
-    t.remaining=t.duration;t.warned5=false;t.warned1=false;t.sessionCounted=false;t.children=1;
+    t.remaining=t.mode==="free"?0:t.duration;t.elapsed=0;t.startAt=null;t.warned5=false;t.warned1=false;t.sessionCounted=false;t.children=1;
     save();stopAlarmIfNone();render();
   }
 }
@@ -1338,6 +1455,7 @@ function tick(){
     el.querySelector(".start").textContent=t.running?"稼働中":"スタート";
   });
   updateSummary();
+  if(alarmSet.size)startAlarm();
   if(saveNeeded)save();
 }
 function updateSummary(){
@@ -1365,7 +1483,7 @@ document.getElementById("resumeAll").onclick=()=>{
     if(t.running||t.done)return;
     if(t.mode==="free"&&t.elapsed>0){
       t.startAt=now-t.elapsed*1000;t.running=true;
-    }else if(t.mode==="countdown"&&t.remaining>0&&t.remaining<t.duration){
+    }else if(t.mode!=="free"&&t.remaining>0&&t.remaining<t.duration){
       t.endAt=now+t.remaining*1000;t.running=true;
     }
   });
@@ -1390,6 +1508,7 @@ function prepareAndPrintSummary(){
  document.getElementById("print30").textContent=`${dailyCounts.m30}回`;
  document.getElementById("print60").textContent=`${dailyCounts.m60}回`;
  document.getElementById("printFree").textContent=`${dailyCounts.free}回`;
+ document.getElementById("printCoupon").textContent=`${dailyCounts.coupon}回`;
  document.getElementById("printKids30").textContent=`${dailyCounts.kids30}人`;
  document.getElementById("printKids60").textContent=`${dailyCounts.kids60}人`;
  document.getElementById("printKidsFree").textContent=`${dailyCounts.kidsFree}人`;
@@ -1412,9 +1531,14 @@ loadDailyCounts();load();render();setInterval(tick,250);
 <tr><td>30分（500円/人）</td><td id="print30">0回</td><td id="printKids30">0人</td><td id="printSales30">¥0</td></tr>
 <tr><td>60分（800円/人）</td><td id="print60">0回</td><td id="printKids60">0人</td><td id="printSales60">¥0</td></tr>
 <tr><td>フリータイム（1,000円/人）</td><td id="printFree">0回</td><td id="printKidsFree">0人</td><td id="printSalesFree">¥0</td></tr>
+<tr><td>お試しクーポン（15分無料）</td><td id="printCoupon">0回</td><td>－</td><td>¥0</td></tr>
 </tbody></table>
 <div class="grand"><span>本日の売上合計</span><strong id="printTotal">¥0</strong></div>
 <div class="note">計測回数は各タイマーの新規スタート時に自動集計されています。</div>
 </div>
-</body>
+<script>
+if('serviceWorker' in navigator && location.protocol==='https:') navigator.serviceWorker.register('./sw.js').catch(console.error);
+let wakeLock=null; async function keepAwake(){try{if('wakeLock' in navigator && !document.hidden && (!wakeLock || wakeLock.released))wakeLock=await navigator.wakeLock.request('screen')}catch(e){}}
+document.addEventListener('click',keepAwake);document.addEventListener('visibilitychange',keepAwake);keepAwake();
+</script></body>
 </html>
